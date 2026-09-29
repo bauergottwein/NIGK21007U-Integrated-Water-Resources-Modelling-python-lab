@@ -1,0 +1,7 @@
+{
+  "workbench.colorTheme": "Light Modern",
+  "editor.fontSize": 14,
+  "editor.minimap.enabled": false,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python-envs.defaultEnvManager": "ms-python.python:system"
+}

@@ -1,0 +1,36 @@
+[project]
+name = "nigk21007u-hydrology-lab"
+version = "0.1.0"
+description = "Integrated Water Resources Modelling Python Environment"
+channels = ["conda-forge"]
+platforms = ["win-64", "osx-64", "osx-arm64", "linux-64"]
+
+[dependencies]
+python = ">=3.10"
+
+# --- Core Numerical & Visualization ---
+scipy = "*"
+numpy = "*"
+matplotlib = "*"
+pandas = "*"
+openpyxl = "*"
+xlrd = "*"
+
+# --- GIS, Hydrology & Modeling ---
+geopandas = "*"
+cartopy = "*"
+netcdf4 = "*"
+pyresample = "*"
+flopy = "*"
+
+# --- Optimization & Solvers ---
+pyomo = "*"
+glpk = "*"
+
+# --- Jupyter Environment Support ---
+jupyter = "*"
+ipykernel = "*"
+
+[pypi-dependencies]
+mikeio = "*"
+mikeio1d = "*"
