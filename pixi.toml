@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "nigk21007u-hydrology-lab"
 version = "0.1.0"
 description = "Integrated Water Resources Modelling Python Environment"
@@ -7,6 +7,7 @@ platforms = ["win-64", "osx-64", "osx-arm64", "linux-64"]
 
 [dependencies]
 python = ">=3.10"
+git = "*"
 
 # --- Core Numerical & Visualization ---
 scipy = "*"
@@ -21,7 +22,6 @@ geopandas = "*"
 cartopy = "*"
 netcdf4 = "*"
 pyresample = "*"
-flopy = "*"
 
 # --- Optimization & Solvers ---
 pyomo = "*"
@@ -31,6 +31,26 @@ glpk = "*"
 jupyter = "*"
 ipykernel = "*"
 
+# --- Windows Lab Stability: Force MKL & thread safety ---
+[target.win-64.dependencies]
+mkl = "*"
+mkl-service = "*"
+blas = { version = "*", build = "*mkl*" }
+libblas = { version = "*", build = "*mkl*" }
+
 [pypi-dependencies]
 mikeio = "*"
 mikeio1d = "*"
+
+[activation.env]
+OPENBLAS_NUM_THREADS = "1"
+MKL_NUM_THREADS = "1"
+OMP_NUM_THREADS = "1"
+KMP_DUPLICATE_LIB_OK = "TRUE"
+MPLBACKEND = "module://matplotlib_inline.backend_inline"
+
+[tasks]
+setup-kernel = { cmd = [
+    "python", "-c",
+    "import sys, json, os, subprocess; name = 'nigk21007u-env'; display = 'nigk21007u python lab (Pixi)'; subprocess.run([sys.executable, '-m', 'ipykernel', 'install', '--user', '--name', name, '--display-name', display], check=True); from jupyter_core.paths import jupyter_data_dir; spec_path = os.path.join(jupyter_data_dir(), 'kernels', name, 'kernel.json'); manifest = os.path.abspath('pixi.toml'); data = {'argv': ['pixi', 'run', '--manifest-path', manifest, 'python', '-m', 'ipykernel_launcher', '-f', '{connection_file}'], 'display_name': display, 'language': 'python', 'metadata': {'debugger': True}}; json.dump(data, open(spec_path, 'w'), indent=2); settings = {'workbench.colorTheme': 'Light Modern', 'editor.fontSize': 14, 'editor.minimap.enabled': False, 'jupyter.kernels.filter': [{'path': 'c:\\\\Temp\\\\*\\\\.pixi\\\\envs\\\\default\\\\python.exe', 'type': 'pythonEnvironment', 'exclude': True}], 'jupyter.widgetScriptSources': ['sdk', 'inline'], 'python.terminal.activateEnvironment': False, 'jupyter.notebookFileRoot': '${workspaceFolder}'}; vscode_dir = os.path.join(os.getcwd(), '.vscode'); os.makedirs(vscode_dir, exist_ok=True); open(os.path.join(vscode_dir, 'settings.json'), 'w').write(json.dumps(settings, indent=2)); print('Kernel and VS Code settings updated successfully!')"
+] }
