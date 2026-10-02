@@ -2,10 +2,13 @@
   "workbench.colorTheme": "Light Modern",
   "editor.fontSize": 14,
   "editor.minimap.enabled": false,
-  "jupyter.widgetScriptSources": ["sdk", "inline"],
+  "jupyter.widgetScriptSources": [
+    "sdk",
+    "inline"
+  ],
   "python.terminal.activateEnvironment": false,
   "jupyter.notebookFileRoot": "${workspaceFolder}",
   "jupyter.kernels.excludePythonEnvironments": [
-    "c:\\Temp\\*\\.pixi\\envs\\default\\python.exe"
+    "c:\\\\Temp\\\\*\\\\.pixi\\\\envs\\\\default\\\\python.exe"
   ]
 }
